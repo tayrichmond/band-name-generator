@@ -15,7 +15,7 @@ var randomFacts = ["Odontophobia is the fear of teeth.",
   "Elephants are the only mammals that can't jump."];
 
 
-app.get("/", function (req, res) {
+app.get("/fact", function (req, res) {
   var arrayLength = randomFacts.length;
   var index = Math.floor(Math.random() * arrayLength);
 
