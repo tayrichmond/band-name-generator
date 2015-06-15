@@ -2,60 +2,73 @@ var express = require("express");
 var app = express();
 var port = process.env.PORT || 3000;
 
-var bandNames = [
-  "Wicked Purple Mountain Ranges",
-  "Pickled Princes",
-  "Neverly Appointed"
-];
+var Adjective = function() {
+  this.sleepy = true;
+  this.fuzzy = true;
+  this.cranky = true;
+  this.soporific = true;
+  this.lazy = true;
+  this.penultimate = true;
+  this.geodesic = true;
+  this.superb = true;
+  this.tasty = true;
+  this.intense = true;
+  this.magnificent = true;
+  this.eloquent = true;
+};
 
-var adjectives = [
-  "Beautiful",
-  "Sick",
-  "Adorable",
-  "Bumpy",
-  "Green",
-  "Delightful",
-  "Slippery",
-  "Flavorfilled",
-  "Mega"
-];
+var Adjective = new Adjective();
 
-var verbs = [
-  "Running",
-  "Swimming",
-  "Screaming",
-  "Falling",
-  "Driving",
-  "Sitting",
-  "Standing"
-];
+var Verb = function() {
+  this.sleeping = true;
+  this.skiing = true;
+  this.flopped = true;
+  this.waiting = true;
+  this.plotting = true;
+  this.burping = true;
+  this.sneezing = true;
+  this.flying = true;
+  this.snoozing = true;
+  this.dancing = true;
+};
 
-var nouns = [
-  "Tree",
-  "Airplane",
-  "Bunny",
-  "Kitty",
-  "Couch",
-  "Sauce",
-  "Cake",
-  "Spoon"
-];
+var verb = new Verb();
 
-app.use(express.static(__dirname + "/app/"));
+var Noun = function() {
+  this.ninjas = true;
+  this.cowboys = true;
+  this.bears = true;
+  this.beats = true;
+  this.alligators = true;
+  this.hamsters = true;
+  this.otters = true;
+  this.helicopters = true;
+  this.unicorns = true;
+  this.rhymes = true;
+};
+
+var noun = new Noun();
+
+function getRandomWord(object) {
+  var propArray = Object.keys(object);
+  var randomProp = propArray[Math.floor(Math.random() * propArray.length)];
+  return {word: randomProp};
+}
+
+app.get("/", function(request, response) {
+  response.sendFile("index.html");
+});
 
 app.get("/adjective", function(request, response) {
-  var randomIndex = Math.floor(Math.random() * adjectives.length);
-  response.json( { word: adjectives[randomIndex] } );
+  response.json(getRandomWord(adjective));
 });
 
 app.get("/verb", function(request, response) {
-  var randomIndex = Math.floor(Math.random() * verbs.length);
-  response.json( { word: verbs[randomIndex] } );
+  response.json(getRandomWord(verb));
 });
 
 app.get("/noun", function(request, response) {
-  var randomIndex = Math.floor(Math.random() * nouns.length);
-  response.json( { word: nouns[randomIndex] } );
+  response.json(getRandomWord(noun));
 });
 
 app.listen(port, function() {
