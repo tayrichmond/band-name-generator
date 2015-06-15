@@ -67,9 +67,7 @@ app.get("/noun", function(request, response) {
   response.json(getRandomWord(noun));
 });
 
-app.get("/", function(request, response) {
-  response.sendFile("index.html");
-});
+app.use(express.static(__dirname + "/app/"));
 
 app.listen(port, function() {
   console.log("Your server started on port " + port);
