@@ -55,10 +55,6 @@ function getRandomWord(object) {
   return {word: randomProp};
 }
 
-app.get("/", function(request, response) {
-  response.sendFile("index.html");
-});
-
 app.get("/adjective", function(request, response) {
   response.json(getRandomWord(adjective));
 });
@@ -69,6 +65,10 @@ app.get("/verb", function(request, response) {
 
 app.get("/noun", function(request, response) {
   response.json(getRandomWord(noun));
+});
+
+app.get("/", function(request, response) {
+  response.sendFile("index.html");
 });
 
 app.listen(port, function() {
