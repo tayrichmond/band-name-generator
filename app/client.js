@@ -1,13 +1,21 @@
 $(function() {
+
   $('button').on('click', function() {
     $.get('/verb', function(response) {
-      $('#verb').html(response.word);
+      var verb = response.word;
+      $('#verb').html(verb);
     });
+
     $.get('/adjective', function(response) {
-      $('#adjective').html(response.word);
+      var adjective = response.word;
+      $('#adjective').html(adjective);
     });
+
     $.get('/noun', function(response) {
-      $('#noun').html(response.word);
+      var noun = response.word;
+      $('#noun').html(noun);
     });
+
   });
+
 });
