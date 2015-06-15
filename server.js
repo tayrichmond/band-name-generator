@@ -17,7 +17,7 @@ var Adjective = function() {
   this.eloquent = true;
 };
 
-var Adjective = new Adjective();
+var adjective = new Adjective();
 
 var Verb = function() {
   this.sleeping = true;
