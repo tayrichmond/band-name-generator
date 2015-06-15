@@ -1,5 +1,15 @@
 $(function() {
 
+  $('form').on('submit', function(event) {
+    event.preventDefault();
+    var userAdjective = $('#user-adjective').val();
+    $.post('/adjective', {word: userAdjective}, function(response) {
+      var confirm = response.message + "We saved: <em>" + response.confirm + "</em>";
+      $('#adjective-res').html(confirm);
+    });
+  });
+
+
   $('button').on('click', function() {
     $.get('/verb', function(response) {
       var verb = response.word;

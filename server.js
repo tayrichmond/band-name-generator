@@ -1,6 +1,11 @@
 var express = require("express");
+var bodyParser = require("body-parser");
 var app = express();
 var port = process.env.PORT || 3000;
+
+app.use(express.static(__dirname + "/app/"));
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({extended: true}));
 
 var Adjective = function() {
   this.sleepy = true;
@@ -55,6 +60,11 @@ function getRandomWord(object) {
   return {word: randomProp};
 }
 
+app.post("/adjective", function(request, response) {
+  adjective[request.body.word] = true;
+  response.json({message: "Ya did it!", confirm: request.body.word});
+});
+
 app.get("/adjective", function(request, response) {
   response.json(getRandomWord(adjective));
 });
@@ -66,8 +76,6 @@ app.get("/verb", function(request, response) {
 app.get("/noun", function(request, response) {
   response.json(getRandomWord(noun));
 });
-
-app.use(express.static(__dirname + "/app/"));
 
 app.listen(port, function() {
   console.log("Your server started on port " + port);
